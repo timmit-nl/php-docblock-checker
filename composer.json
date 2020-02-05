@@ -1,5 +1,5 @@
 {
-  "name": "dancryer/php-docblock-checker",
+  "name": "bilberrry/php-docblock-checker",
   "description": "A simple tool for checking that your PHP classes and methods use docblocks.",
   "minimum-stability": "stable",
   "type": "library",
@@ -29,7 +29,7 @@
   "require": {
     "php": ">=5.5",
     "nikic/php-parser": "3.*|4.*",
-    "symfony/console": "3.4.*|4.*",
+    "symfony/console": "3.3.10",
     "symfony/yaml": "3.4.*|4.*",
     "ext-json": "*"
   },
