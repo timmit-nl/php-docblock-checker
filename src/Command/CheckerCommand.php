@@ -9,20 +9,20 @@
 
 namespace PhpDocBlockChecker\Command;
 
+use PhpParser\ParserFactory;
+use PhpDocBlockChecker\FileChecker;
 use PhpDocBlockChecker\Check\Checker;
 use PhpDocBlockChecker\Config\ConfigParser;
-use PhpDocBlockChecker\Config\ConfigProcessor;
-use PhpDocBlockChecker\DocblockParser\DocblockParser;
-use PhpDocBlockChecker\FileChecker;
 use PhpDocBlockChecker\FileInfoCacheProvider;
 use PhpDocBlockChecker\FileParser\FileParser;
-use PhpDocBlockChecker\FileProvider\FileProviderFactory;
-use PhpDocBlockChecker\Status\StatusCollection;
-use PhpParser\ParserFactory;
+use PhpDocBlockChecker\Config\ConfigProcessor;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
+use PhpDocBlockChecker\Status\StatusCollection;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
+use PhpDocBlockChecker\DocblockParser\DocblockParser;
 use Symfony\Component\Console\Output\OutputInterface;
+use PhpDocBlockChecker\FileProvider\FileProviderFactory;
 
 /**
  * Console command to check a directory of PHP files for Docblocks.
@@ -142,7 +142,7 @@ class CheckerCommand extends Command
 
         // Check files:
         $filesPerLine = $config->getFilesPerLine();
-        $totalFiles = iterator_count($files);
+        $totalFiles   = iterator_count($files);
         //$files = array_chunk($files, $filesPerLine);
         $processed = 0;
 
@@ -166,6 +166,10 @@ class CheckerCommand extends Command
         /** @var \SplFileInfo $file */
         foreach ($files as $file) {
             $processed++;
+
+            if (!\file_exists($file->getPathname())) {
+                continue;
+            }
 
             $status = $fileChecker->checkFile($file->getPathname());
             $statusCollection->addFileStatus($status);
