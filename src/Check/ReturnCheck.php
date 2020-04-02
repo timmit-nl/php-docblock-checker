@@ -3,8 +3,8 @@
 namespace PhpDocBlockChecker\Check;
 
 use PhpDocBlockChecker\FileInfo;
-use PhpDocBlockChecker\Status\StatusType\Warning\ReturnMismatchWarning;
 use PhpDocBlockChecker\Status\StatusType\Warning\ReturnMissingWarning;
+use PhpDocBlockChecker\Status\StatusType\Warning\ReturnMismatchWarning;
 
 class ReturnCheck extends Check
 {
@@ -44,22 +44,22 @@ class ReturnCheck extends Check
                         );
                         continue;
                     }
-                }
-
-                if ($method['docblock']['return'] !== $method['return']) {
-                    if ($method['return'] === 'array' && substr($method['docblock']['return'], -2) === '[]') {
-                        // Do nothing because this is fine.
-                    } else {
-                        $this->fileStatus->add(
-                            new ReturnMismatchWarning(
-                                $file->getFileName(),
-                                $name,
-                                $method['line'],
-                                $name,
-                                $method['return'],
-                                $method['docblock']['return']
-                            )
-                        );
+                } else {
+                    if ($method['docblock']['return'] !== $method['return']) {
+                        if ($method['return'] === 'array' && substr($method['docblock']['return'], -2) === '[]') {
+                            // Do nothing because this is fine.
+                        } else {
+                            $this->fileStatus->add(
+                                new ReturnMismatchWarning(
+                                    $file->getFileName(),
+                                    $name,
+                                    $method['line'],
+                                    $name,
+                                    $method['return'],
+                                    $method['docblock']['return']
+                                )
+                            );
+                        }
                     }
                 }
             }
