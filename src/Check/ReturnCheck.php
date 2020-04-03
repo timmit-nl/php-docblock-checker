@@ -42,7 +42,6 @@ class ReturnCheck extends Check
                                 $method['docblock']['return']
                             )
                         );
-                        continue;
                     }
                 } else {
                     if ($method['docblock']['return'] !== $method['return']) {

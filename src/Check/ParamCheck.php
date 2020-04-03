@@ -2,6 +2,8 @@
 
 namespace PhpDocBlockChecker\Check;
 
+use Exception;
+use ReflectionMethod;
 use PhpDocBlockChecker\FileInfo;
 use PhpDocBlockChecker\Status\StatusType\Warning\ParamMismatchWarning;
 use PhpDocBlockChecker\Status\StatusType\Warning\ParamMissingWarning;
@@ -30,9 +32,28 @@ class ParamCheck extends Check
 
                 if (!empty($type)) {
                     $docBlockTypes = explode('|', $method['docblock']['params'][$param]);
-                    $methodTypes = explode('|', $type);
+                    $methodTypes   = explode('|', $type);
 
                     sort($docBlockTypes);
+
+                    if (!\in_array('null', $methodTypes)) {
+                        try {
+                            $explode          = \explode('::', $method['name']);
+                            $class            = $explode[0];
+                            $methodName       = $explode[1];
+                            $reflectionMethod = new ReflectionMethod($class, $methodName);
+                            $parameters       = $reflectionMethod->getParameters();
+                            foreach ($parameters as $parameter) {
+                                if ('$' . $parameter->getName() === $param) {
+                                    if ($parameter->getType()->allowsNull()) {
+                                        $methodTypes[] = 'null';
+                                    }
+                                }
+                            }
+                        } catch (Exception $ex) {}
+                    }
+
+                    $methodTypes = \array_unique($methodTypes);
                     sort($methodTypes);
 
                     if ($docBlockTypes !== $methodTypes) {
