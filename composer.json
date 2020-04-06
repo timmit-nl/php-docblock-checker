@@ -45,7 +45,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "PhpDocBlockChecker\\": "src"
+        "PhpDocBlockChecker\\": "src",
+        "PhpDocBlockChecker\\Tests\\": "tests"
     }
   },
   "scripts": {

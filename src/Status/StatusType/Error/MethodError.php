@@ -9,6 +9,9 @@ class MethodError extends Error
      */
     private $method;
 
+    /** @var string */
+    private $methodName;
+
     /**
      * MethodError constructor.
      * @param string $file
@@ -19,7 +22,8 @@ class MethodError extends Error
     public function __construct($file, $class, $line, $method)
     {
         parent::__construct($file, $class, $line);
-        $this->method = $method;
+        $this->method     = $method;
+        $this->methodName = \explode('::', $method)[1];
     }
 
     /**
@@ -28,6 +32,14 @@ class MethodError extends Error
     public function getMethod()
     {
         return $this->method;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethodName()
+    {
+        return $this->methodName;
     }
 
     public function getType()

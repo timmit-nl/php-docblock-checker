@@ -2,8 +2,8 @@
 
 namespace PhpDocBlockChecker\Check;
 
-use PhpDocBlockChecker\Config\Config;
 use PhpDocBlockChecker\FileInfo;
+use PhpDocBlockChecker\Config\Config;
 use PhpDocBlockChecker\Status\FileStatus;
 use PhpDocBlockChecker\Status\StatusType\Passed\Passed;
 
@@ -18,7 +18,8 @@ class Checker
         ClassCheck::class,
         MethodCheck::class,
         ParamCheck::class,
-        ReturnCheck::class
+        ReturnCheck::class,
+        DescriptionCheck::class,
     ];
 
     public function __construct(Config $config)

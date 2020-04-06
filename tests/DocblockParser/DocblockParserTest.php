@@ -8,6 +8,8 @@ class DocblockParserTest extends \PHPUnit_Framework_TestCase
     {
         $comment = <<<EOF
 /**
+  * Method description
+  *
   * @author me
   * @param int \$foo some int
   * @param string \$bar some string
@@ -20,6 +22,8 @@ EOF;
         $result = $docblockParser->parseComment($comment);
 
         $this->assertInstanceOf(TagCollection::class, $result);
+
+        $this->assertTrue($result->hasTag('descriptionLine'));
 
         $this->assertTrue($result->hasTag('author'));
         $this->assertTrue($result->hasTag('param'));

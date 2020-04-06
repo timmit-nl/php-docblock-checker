@@ -2,23 +2,27 @@
 
 namespace PhpDocBlockChecker\FileParser;
 
-use PhpDocBlockChecker\DocblockParser\DocblockParser;
-use PhpDocBlockChecker\DocblockParser\ReturnTag;
-use PhpDocBlockChecker\FileInfo;
-use PhpParser\Comment\Doc;
-use PhpParser\Node\Expr;
-use PhpParser\Node\NullableType;
-use PhpParser\Node\Param;
-use PhpParser\Node\Stmt;
-use PhpParser\Node\Stmt\Class_;
-use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Namespace_;
-use PhpParser\Node\Stmt\Use_;
-use PhpParser\NodeAbstract;
+use Exception;
+use ReflectionClass;
 use PhpParser\Parser;
+use PhpParser\Node\Expr;
+use PhpParser\Node\Stmt;
+use PhpParser\Node\Param;
+use PhpParser\Comment\Doc;
+use PhpParser\NodeAbstract;
+use PhpParser\Node\Stmt\Use_;
+use PhpParser\Node\Stmt\Class_;
+use PhpDocBlockChecker\FileInfo;
+use PhpParser\Node\NullableType;
+use PhpParser\Node\Stmt\Namespace_;
+use PhpParser\Node\Stmt\ClassMethod;
+use PhpDocBlockChecker\DocblockParser\DocBlock;
+use PhpDocBlockChecker\DocblockParser\ReturnTag;
+use PhpDocBlockChecker\DocblockParser\DocblockParser;
 
 /**
  * Uses Nikic/PhpParser to parse PHP files and find relevant information for the checker.
+ *
  * @package PhpDocBlockChecker
  */
 class FileParser
@@ -34,17 +38,19 @@ class FileParser
 
     /**
      * Load and parse a PHP file.
-     * @param Parser $parser
+     *
+     * @param Parser         $parser
      * @param DocblockParser $docblockParser
      */
     public function __construct(Parser $parser, DocblockParser $docblockParser)
     {
-        $this->parser = $parser;
+        $this->parser         = $parser;
         $this->docblockParser = $docblockParser;
     }
 
     /**
      * @param string $file
+     *
      * @return FileInfo
      */
     public function parseFile($file)
@@ -60,6 +66,7 @@ class FileParser
         }
 
         $result = $this->processStatements($file, $stmts);
+
         return new FileInfo(
             $file,
             $result['classes'],
@@ -70,14 +77,16 @@ class FileParser
 
     /**
      * Looks for class definitions, and then within them method definitions, docblocks, etc.
+     *
      * @param string $file
-     * @param array $statements
+     * @param array  $statements
      * @param string $prefix
+     *
      * @return mixed
      */
     protected function processStatements($file, array $statements, $prefix = '')
     {
-        $uses = [];
+        $uses    = [];
         $methods = [];
         $classes = [];
 
@@ -99,14 +108,23 @@ class FileParser
             }
 
             if ($statement instanceof Class_) {
-                $class = $statement;
+                $class         = $statement;
                 $fullClassName = $prefix . '\\' . $class->name;
 
+                $docblockDescription = '';
+
+                try {
+                    $reflectionClass     = new ReflectionClass($fullClassName);
+                    $docblockDescription = (new DocBlock($reflectionClass->getDocComment()))->desc;
+                } catch (Exception $e) {
+                }
+
                 $classes[$fullClassName] = [
-                    'file' => $file,
-                    'line' => $class->getAttribute('startLine'),
-                    'name' => $fullClassName,
-                    'docblock' => $this->getDocblock($class, $uses),
+                    'file'                => $file,
+                    'line'                => $class->getAttribute('startLine'),
+                    'name'                => $fullClassName,
+                    'docblock'            => $this->getDocblock($class, $uses),
+                    'docblockDescription' => $docblockDescription,
                 ];
 
                 foreach ($statement->stmts as $method) {
@@ -137,15 +155,27 @@ class FileParser
                         sort($type);
                     }
 
+                    $docblockDescription = '';
+
+                    try {
+                        $reflectionClass     = new ReflectionClass($fullClassName);
+                        $methodReflection    = $reflectionClass->getMethod($method->name);
+                        $docblockDescription = (new DocBlock($methodReflection->getDocComment()))->desc;
+                    } catch (Exception $e) {
+                    }
+
                     $thisMethod = [
-                        'file' => $file,
-                        'class' => $fullClassName,
-                        'name' => $fullMethodName,
-                        'line' => $method->getAttribute('startLine'),
-                        'return' => $type,
-                        'params' => [],
-                        'docblock' => $this->getDocblock($method, $uses),
-                        'has_return' => isset($method->stmts) ? $this->statementsContainReturn($method->stmts) : false,
+                        'file'                => $file,
+                        'class'               => $fullClassName,
+                        'name'                => $fullMethodName,
+                        'line'                => $method->getAttribute('startLine'),
+                        'return'              => $type,
+                        'params'              => [],
+                        'docblock'            => $this->getDocblock($method, $uses),
+                        'docblockDescription' => $docblockDescription,
+                        'has_return'          => isset($method->stmts) ? $this->statementsContainReturn(
+                            $method->stmts
+                        ) : false,
                     ];
 
                     /** @var Param $param */
@@ -199,7 +229,9 @@ class FileParser
 
     /**
      * Recursively search an array of statements for a return statement.
+     *
      * @param array $statements
+     *
      * @return bool
      */
     protected function statementsContainReturn(array $statements)
@@ -223,8 +255,10 @@ class FileParser
 
     /**
      * Find and parse a docblock for a given class or method.
-     * @param Stmt $stmt
+     *
+     * @param Stmt  $stmt
      * @param array $uses
+     *
      * @return array|null
      */
     protected function getDocblock(Stmt $stmt, array $uses = [])
@@ -244,7 +278,8 @@ class FileParser
 
     /**
      * @param string $text
-     * @param array $uses
+     * @param array  $uses
+     *
      * @return array
      */
     protected function processDocblock($text, array $uses = [])

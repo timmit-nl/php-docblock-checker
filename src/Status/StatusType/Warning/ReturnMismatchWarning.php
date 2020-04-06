@@ -8,6 +8,12 @@ class ReturnMismatchWarning extends Warning
      * @var string
      */
     private $method;
+
+    /**
+     * @var string
+     */
+    private $methodName;
+
     /**
      * @var string
      */
@@ -32,6 +38,8 @@ class ReturnMismatchWarning extends Warning
         $this->method = $method;
         $this->returnType = $returnType;
         $this->docType = $docType;
+
+        $this->methodName = \explode('::', $method)[1];
     }
 
     /**
@@ -48,6 +56,14 @@ class ReturnMismatchWarning extends Warning
     public function getMethod()
     {
         return $this->method;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethodName()
+    {
+        return $this->methodName;
     }
 
     /**

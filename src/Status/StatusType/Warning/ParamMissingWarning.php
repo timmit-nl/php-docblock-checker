@@ -8,6 +8,12 @@ class ParamMissingWarning extends Warning
      * @var string
      */
     private $method;
+
+    /**
+     * @var string
+     */
+    private $methodName;
+
     /**
      * @var string
      */
@@ -26,6 +32,8 @@ class ParamMissingWarning extends Warning
         parent::__construct($file, $class, $line);
         $this->method = $method;
         $this->param = $param;
+
+        $this->methodName = \explode('::', $method)[1];
     }
 
     /**
@@ -42,6 +50,14 @@ class ParamMissingWarning extends Warning
     public function getMethod()
     {
         return $this->method;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethodName()
+    {
+        return $this->methodName;
     }
 
     /**
