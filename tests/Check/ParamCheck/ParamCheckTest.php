@@ -48,6 +48,7 @@ class ParamCheckTest extends \PHPUnit_Framework_TestCase
 
         $success = [
             'success',
+            'success2',
         ];
 
         $actual = [];

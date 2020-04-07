@@ -35,6 +35,21 @@ class ParamTag extends Tag
         $this->type = isset($parts[0]) ? $parts[0] : '';
         $this->var = isset($parts[1]) ? $parts[1] : '';
         $this->desc = isset($parts[2]) ? $parts[2] : '';
+
+        if (\strpos($this->type, '$') === 0) {
+            $this->desc = $this->var . ' ' . $this->desc;
+            $this->var  = $this->type;
+            $this->type = '';
+        }
+
+        if (empty($this->var) && !empty($this->type)) {
+            $this->var  = $this->type;
+            $this->type = '';
+        }
+
+        $this->type = \trim($this->type);
+        $this->var  = \trim($this->var);
+        $this->desc = \trim($this->desc);
     }
 
     /**

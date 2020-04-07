@@ -2,6 +2,11 @@
 
 namespace PhpDocBlockChecker\Tests\Check\ParamCheck;
 
+/**
+ * Class ParamCheckTestClass
+ *
+ * @package PhpDocBlockChecker\Tests\Check\ParamCheck
+ */
 class ParamCheckTestClass
 {
     /**
@@ -22,8 +27,9 @@ class ParamCheckTestClass
 
     /**
      * @param int $i
+     * @param     $r
      */
-    public function success(int $i)
+    public function success2(int $i, $r)
     {
 
     }

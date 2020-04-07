@@ -11,7 +11,8 @@ class DocblockParserTest extends \PHPUnit_Framework_TestCase
   * Method description
   *
   * @author me
-  * @param int \$foo some int
+  * @param        \$ret
+  * @param        \$foo some int
   * @param string \$bar some string
   * @param \DateTimeImmutable \$baz some date
   * @return stdClass some class
@@ -22,8 +23,6 @@ EOF;
         $result = $docblockParser->parseComment($comment);
 
         $this->assertInstanceOf(TagCollection::class, $result);
-
-        $this->assertTrue($result->hasTag('descriptionLine'));
 
         $this->assertTrue($result->hasTag('author'));
         $this->assertTrue($result->hasTag('param'));
@@ -37,8 +36,13 @@ EOF;
 
         $expected = [
             [
-                'var' => '$foo',
-                'type' => 'int',
+                'var'  => '$ret',
+                'type' => '',
+                'desc' => '',
+            ],
+            [
+                'var'  => '$foo',
+                'type' => '',
                 'desc' => 'some int',
             ],
             [
