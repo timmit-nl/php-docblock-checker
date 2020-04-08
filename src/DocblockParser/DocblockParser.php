@@ -8,6 +8,8 @@ namespace PhpDocBlockChecker\DocblockParser;
  */
 class DocblockParser
 {
+    public const DESCRIPTION_TAG_NME = '_descriptionLine';
+
     /**
      * Parse the comment into the component parts and set the state of the object.
      * @param string $comment The docblock
@@ -15,8 +17,16 @@ class DocblockParser
      */
     public function parseComment($comment)
     {
+        $tags = new TagCollection;
+
+        preg_match_all('/\*\s+(\w+.*)\n/', $comment, $matches, PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            array_shift($match);
+
+            $tags->addTag($this->getTagEntity(self::DESCRIPTION_TAG_NME, $match[0]));
+        }
+
         preg_match_all('/@([a-zA-Z]+) *(.*)\n/', $comment, $matches, PREG_SET_ORDER);
-        $tags = new TagCollection();
 
         foreach ($matches as $match) {
             array_shift($match);
@@ -41,6 +51,10 @@ class DocblockParser
 
         if ($tag === 'return') {
             return new ReturnTag($tag, $body);
+        }
+
+        if ($tag === self::DESCRIPTION_TAG_NME) {
+            return new DescriptionTag($body);
         }
 
         return new Tag($tag, $body);

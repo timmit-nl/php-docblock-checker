@@ -16,4 +16,14 @@ class TestClass
     {
         return true;
     }
+
+    /**
+     * Test description
+     *
+     * @return bool
+     */
+    public function description()
+    {
+        return true;
+    }
 }

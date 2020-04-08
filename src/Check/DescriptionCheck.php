@@ -22,7 +22,7 @@ class DescriptionCheck extends Check
                 $treatAsError = false;
             }
 
-            if (empty($method['docblockDescription'])) {
+            if (empty($method['docblock']['comment'])) {
                 if (true === $treatAsError) {
                     $this->fileStatus->add(new DescriptionError($file->getFileName(), $name, $method['line'], $name));
                 } else {

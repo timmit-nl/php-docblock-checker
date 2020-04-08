@@ -9,6 +9,7 @@ class DocblockParserTest extends \PHPUnit_Framework_TestCase
         $comment = <<<EOF
 /**
   * Method description
+  * Method description line 2
   *
   * @author me
   * @param        \$ret
@@ -24,9 +25,23 @@ EOF;
 
         $this->assertInstanceOf(TagCollection::class, $result);
 
+        $this->assertTrue($result->hasTag(DocblockParser::DESCRIPTION_TAG_NME));
         $this->assertTrue($result->hasTag('author'));
         $this->assertTrue($result->hasTag('param'));
         $this->assertTrue($result->hasTag('return'));
+
+        $expected = [
+            [
+                'value' => 'Method description',
+            ],
+            [
+                'value' => 'Method description line 2',
+            ],
+        ];
+
+        foreach ($result->getDescriptionTags() as $key => $descriptionTag) {
+            $this->assertEquals($expected[$key]['value'], $descriptionTag->getValue());
+        }
 
         $returnTags = $result->getReturnTags();
         $this->assertCount(1, $returnTags);

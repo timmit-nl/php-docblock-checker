@@ -8,6 +8,7 @@ class Tag
      * @var string
      */
     private $name;
+
     /**
      * @var string
      */

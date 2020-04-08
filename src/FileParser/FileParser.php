@@ -2,8 +2,6 @@
 
 namespace PhpDocBlockChecker\FileParser;
 
-use Exception;
-use ReflectionClass;
 use PhpParser\Parser;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Stmt;
@@ -16,9 +14,9 @@ use PhpDocBlockChecker\FileInfo;
 use PhpParser\Node\NullableType;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpDocBlockChecker\DocblockParser\DocBlock;
 use PhpDocBlockChecker\DocblockParser\ReturnTag;
 use PhpDocBlockChecker\DocblockParser\DocblockParser;
+use PhpDocBlockChecker\DocblockParser\DescriptionTag;
 
 /**
  * Uses Nikic/PhpParser to parse PHP files and find relevant information for the checker.
@@ -111,20 +109,13 @@ class FileParser
                 $class         = $statement;
                 $fullClassName = $prefix . '\\' . $class->name;
 
-                $docblockDescription = '';
-
-                try {
-                    $reflectionClass     = new ReflectionClass($fullClassName);
-                    $docblockDescription = (new DocBlock($reflectionClass->getDocComment()))->desc;
-                } catch (Exception $e) {
-                }
+                $docblock = $this->getDocblock($class, $uses);
 
                 $classes[$fullClassName] = [
-                    'file'                => $file,
-                    'line'                => $class->getAttribute('startLine'),
-                    'name'                => $fullClassName,
-                    'docblock'            => $this->getDocblock($class, $uses),
-                    'docblockDescription' => $docblockDescription,
+                    'file'     => $file,
+                    'line'     => $class->getAttribute('startLine'),
+                    'name'     => $fullClassName,
+                    'docblock' => $docblock,
                 ];
 
                 foreach ($statement->stmts as $method) {
@@ -155,25 +146,17 @@ class FileParser
                         sort($type);
                     }
 
-                    $docblockDescription = '';
-
-                    try {
-                        $reflectionClass     = new ReflectionClass($fullClassName);
-                        $methodReflection    = $reflectionClass->getMethod($method->name);
-                        $docblockDescription = (new DocBlock($methodReflection->getDocComment()))->desc;
-                    } catch (Exception $e) {
-                    }
+                    $docblock = $this->getDocblock($method, $uses);
 
                     $thisMethod = [
-                        'file'                => $file,
-                        'class'               => $fullClassName,
-                        'name'                => $fullMethodName,
-                        'line'                => $method->getAttribute('startLine'),
-                        'return'              => $type,
-                        'params'              => [],
-                        'docblock'            => $this->getDocblock($method, $uses),
-                        'docblockDescription' => $docblockDescription,
-                        'has_return'          => isset($method->stmts) ? $this->statementsContainReturn(
+                        'file'       => $file,
+                        'class'      => $fullClassName,
+                        'name'       => $fullMethodName,
+                        'line'       => $method->getAttribute('startLine'),
+                        'return'     => $type,
+                        'params'     => [],
+                        'docblock'   => $docblock,
+                        'has_return' => isset($method->stmts) ? $this->statementsContainReturn(
                             $method->stmts
                         ) : false,
                     ];
@@ -290,7 +273,7 @@ class FileParser
             return ['inherit' => true];
         }
 
-        $rtn = ['params' => [], 'return' => null];
+        $rtn = ['params' => [], 'return' => null, 'comment' => null];
 
         if ($tagCollection->hasTag('param')) {
             foreach ($tagCollection->getParamTags() as $paramTag) {
@@ -323,6 +306,20 @@ class FileParser
                 }
                 $rtn['return'] = implode('|', $types);
             }
+        }
+
+        if ($tagCollection->hasTag(DocblockParser::DESCRIPTION_TAG_NME)) {
+            $return = $tagCollection->getDescriptionTags();
+
+            $comment = [];
+
+            foreach ($return as $tag) {
+                if ($tag instanceof DescriptionTag) {
+                    $comment[] = $tag->getValue();
+                }
+            }
+
+            $rtn['comment'] = \implode("\n", $comment);
         }
 
         return $rtn;

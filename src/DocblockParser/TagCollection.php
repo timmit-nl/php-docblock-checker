@@ -61,8 +61,23 @@ class TagCollection
     public function getReturnTags()
     {
         return array_values(
+            array_filter(
+                $this->tags,
+                static function (Tag $tag) {
+                    return $tag instanceof ReturnTag;
+                }
+            )
+        );
+    }
+
+    /**
+     * @return DescriptionTag[]
+     */
+    public function getDescriptionTags()
+    {
+        return array_values(
             array_filter($this->tags, static function (Tag $tag) {
-                return $tag instanceof ReturnTag;
+                return $tag instanceof DescriptionTag;
             })
         );
     }

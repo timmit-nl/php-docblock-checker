@@ -2,8 +2,8 @@
 
 namespace PhpDocBlockChecker\FileParser;
 
-use PhpDocBlockChecker\DocblockParser\DocblockParser;
 use PhpParser\ParserFactory;
+use PhpDocBlockChecker\DocblockParser\DocblockParser;
 
 class FileParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,5 +37,10 @@ class FileParserTest extends \PHPUnit_Framework_TestCase
         $methodBaz = $fileInfo->getMethods()['PhpDocBlockChecker\FileParser\TestClass::baz'];
         $this->assertTrue($methodBaz['has_return']);
         $this->assertEmpty($methodBaz['params']);
+
+        $methodDescription = $fileInfo->getMethods()['PhpDocBlockChecker\FileParser\TestClass::description'];
+        $this->assertEquals('Test description', $methodDescription['docblock']['comment']);
+        $this->assertTrue($methodDescription['has_return']);
+        $this->assertEmpty($methodDescription['params']);
     }
 }
