@@ -35,7 +35,7 @@ class ParamCheckTest extends \PHPUnit_Framework_TestCase
         $this->paramCheck = new ParamCheck(Config::fromArray([]), $this->fileStatus);
     }
 
-    public function testClassDocblock()
+    public function testParamCheck()
     {
         $filePath = __DIR__ . \DIRECTORY_SEPARATOR . 'ParamCheckTestClass.php';
 

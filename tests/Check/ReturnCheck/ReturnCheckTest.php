@@ -35,7 +35,7 @@ class ReturnCheckTest extends \PHPUnit_Framework_TestCase
         $this->returnCheck = new ReturnCheck(Config::fromArray([]), $this->fileStatus);
     }
 
-    public function testClassDocblock()
+    public function testReturnCheck()
     {
         $filePath = __DIR__ . \DIRECTORY_SEPARATOR . 'ReturnCheckTestClass.php';
 
@@ -53,6 +53,7 @@ class ReturnCheckTest extends \PHPUnit_Framework_TestCase
             'returnSuccess',
             'returnSuccess2',
             'returnSuccess3',
+            'returnVoid',
         ];
 
         $actual = [];

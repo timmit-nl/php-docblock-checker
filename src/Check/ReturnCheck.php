@@ -16,6 +16,10 @@ class ReturnCheck extends Check
     {
         foreach ($file->getMethods() as $name => $method) {
             if (!empty($method['return'])) {
+                if (\is_string($method['return']) && 'void' === $method['return']) {
+                    continue;
+                }
+
                 if (empty($method['docblock']['return'])) {
                     $this->fileStatus->add(
                         new ReturnMissingWarning(

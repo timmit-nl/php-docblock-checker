@@ -63,4 +63,12 @@ class ReturnCheckTestClass
     {
         return new stdClass;
     }
+
+    /**
+     * Method return nothing
+     */
+    public function returnVoid(): void
+    {
+
+    }
 }

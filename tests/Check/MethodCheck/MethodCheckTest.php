@@ -34,7 +34,7 @@ class MethodCheckTest extends \PHPUnit_Framework_TestCase
         $this->methodCheck = new MethodCheck(Config::fromArray([]), $this->fileStatus);
     }
 
-    public function testClassDocblock()
+    public function testMethodCheck()
     {
         $filePath = __DIR__ . \DIRECTORY_SEPARATOR . 'MethodCheckTestClass.php';
 

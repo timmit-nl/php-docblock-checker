@@ -34,7 +34,7 @@ class DescriptionCheckTest extends \PHPUnit_Framework_TestCase
         $this->descriptionCheck = new DescriptionCheck(Config::fromArray([]), $this->fileStatus);
     }
 
-    public function testClassDocblock()
+    public function testDescriptionCheck()
     {
         $filePath = __DIR__ . \DIRECTORY_SEPARATOR . 'DescriptionCheckTestClass.php';
 
