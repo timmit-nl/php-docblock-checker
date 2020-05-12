@@ -44,11 +44,15 @@ class ParamCheckTest extends \PHPUnit_Framework_TestCase
         $expected = [
             'missingParam'  => ParamMissingWarning::class,
             'mismatchParam' => ParamMismatchWarning::class,
+            'failNullable'  => ParamMismatchWarning::class,
+            'failNullable2' => ParamMismatchWarning::class,
         ];
 
         $success = [
             'success',
             'success2',
+            'successNullable',
+            'successNullable2',
         ];
 
         $actual = [];
@@ -62,6 +66,6 @@ class ParamCheckTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertFalse($this->fileStatus->hasErrors());
-        $this->assertEmpty(array_merge(array_diff($expected, $actual), array_diff($actual, $expected)));
+        $this->assertEmpty(array_diff(array_keys($expected), array_keys($actual)));
     }
 }
