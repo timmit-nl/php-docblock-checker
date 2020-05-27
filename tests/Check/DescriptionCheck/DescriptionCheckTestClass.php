@@ -26,4 +26,10 @@ class DescriptionCheckTestClass
     {
 
     }
+
+    /** One line comment */
+    public function oneLineDescription()
+    {
+
+    }
 }

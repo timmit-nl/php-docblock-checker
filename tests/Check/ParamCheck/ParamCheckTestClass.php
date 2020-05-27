@@ -67,4 +67,18 @@ class ParamCheckTestClass
     {
 
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function successInheritDocs(?stdClass $p)
+    {
+
+    }
+
+    /** @inheritdoc */
+    public function successInheritDocsOneLine(?stdClass $p)
+    {
+
+    }
 }

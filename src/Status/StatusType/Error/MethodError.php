@@ -5,14 +5,6 @@ namespace PhpDocBlockChecker\Status\StatusType\Error;
 class MethodError extends Error
 {
     /**
-     * @var string
-     */
-    private $method;
-
-    /** @var string */
-    private $methodName;
-
-    /**
      * MethodError constructor.
      * @param string $file
      * @param string $class

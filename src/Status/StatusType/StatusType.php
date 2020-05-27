@@ -4,6 +4,7 @@ namespace PhpDocBlockChecker\Status\StatusType;
 
 /**
  * Class StatusType
+ *
  * @package PhpDocBlockChecker\Status\StatusType
  */
 abstract class StatusType
@@ -17,21 +18,30 @@ abstract class StatusType
      */
     protected $class;
     /**
+     * @var string
+     */
+    protected $method;
+    /**
+     * @var string
+     */
+    protected $methodName;
+    /**
      * @var int
      */
     protected $line;
 
     /**
      * StatusType constructor.
+     *
      * @param string $file
      * @param string $class
-     * @param int $line
+     * @param int    $line
      */
     public function __construct($file, $class, $line)
     {
-        $this->file = $file;
+        $this->file  = $file;
         $this->class = $class;
-        $this->line = $line;
+        $this->line  = $line;
     }
 
     /**
@@ -74,5 +84,21 @@ abstract class StatusType
     public function getLine()
     {
         return $this->line;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethodName()
+    {
+        return $this->methodName;
     }
 }

@@ -24,13 +24,14 @@ class FileInfo implements \JsonSerializable
     public function __construct($fileName, $classes, $methods, $mtime)
     {
         $this->fileName = $fileName;
-        $this->classes = $classes;
-        $this->methods = $methods;
-        $this->mtime = $mtime;
+        $this->classes  = $classes;
+        $this->methods  = $methods;
+        $this->mtime    = $mtime;
     }
 
     /**
      * @param array $data
+     *
      * @return FileInfo
      */
     public static function fromArray(array $data)
@@ -74,9 +75,9 @@ class FileInfo implements \JsonSerializable
     {
         return [
             'fileName' => $this->fileName,
-            'mtime' => $this->mtime,
-            'classes' => $this->classes,
-            'methods' => $this->methods,
+            'mtime'    => $this->mtime,
+            'classes'  => $this->classes,
+            'methods'  => $this->methods,
         ];
     }
 }

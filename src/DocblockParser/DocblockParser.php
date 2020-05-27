@@ -19,18 +19,29 @@ class DocblockParser
     {
         $tags = new TagCollection;
 
-        preg_match_all('/\*\s+(\w+.*)\n/', $comment, $matches, PREG_SET_ORDER);
+        preg_match_all('/\*\s+(\w+.*)\s*/', $comment, $matches, PREG_SET_ORDER);
+
         foreach ($matches as $match) {
             array_shift($match);
 
-            $tags->addTag($this->getTagEntity(self::DESCRIPTION_TAG_NME, $match[0]));
+            $matchBody = \trim($match[0]);
+
+            if ('*/' === \substr($matchBody, -2)) {
+                $matchBody = \trim(\substr($matchBody, 0, -2));
+            }
+
+            $tags->addTag($this->getTagEntity(self::DESCRIPTION_TAG_NME, $matchBody));
         }
 
-        preg_match_all('/@([a-zA-Z]+) *(.*)\n/', $comment, $matches, PREG_SET_ORDER);
+        preg_match_all('/@([a-zA-Z]+) *(.*)\s*/', $comment, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {
             array_shift($match);
             list($tag, $body) = $match;
+
+            if ('*/' === \substr($body, -2)) {
+                $body = \trim(\substr($body, 0, -2));
+            }
 
             $tags->addTag($this->getTagEntity($tag, $body));
         }

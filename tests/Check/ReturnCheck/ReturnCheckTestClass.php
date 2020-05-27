@@ -11,7 +11,7 @@ class ReturnCheckTestClass
         return [];
     }
 
-    public function returnMissing2(): array
+    public function returnMissingWithReturnType(): array
     {
         return [];
     }
@@ -19,7 +19,7 @@ class ReturnCheckTestClass
     /**
      * @return int
      */
-    public function returnMismatch()
+    public function returnMismatchArrayInt()
     {
         return [];
     }
@@ -27,7 +27,7 @@ class ReturnCheckTestClass
     /**
      * @return array
      */
-    public function returnMismatch2(): int
+    public function returnMismatchIntArray(): int
     {
         return 0;
     }
@@ -43,7 +43,7 @@ class ReturnCheckTestClass
     /**
      * @return int|null
      */
-    public function returnSuccess(): ?int
+    public function returnSuccessIntNull(): ?int
     {
         return null;
     }
@@ -51,7 +51,7 @@ class ReturnCheckTestClass
     /**
      * @return int[]
      */
-    public function returnSuccess2(): array
+    public function returnSuccessArray(): array
     {
         return [0];
     }
@@ -59,7 +59,7 @@ class ReturnCheckTestClass
     /**
      * @return stdClass
      */
-    public function returnSuccess3(): stdClass
+    public function returnSuccessStdclass(): stdClass
     {
         return new stdClass;
     }
@@ -70,5 +70,45 @@ class ReturnCheckTestClass
     public function returnVoid(): void
     {
 
+    }
+
+    /**
+     * Method return nothing
+     *
+     * @return void
+     */
+    public function returnVoidWithTag(): void
+    {
+
+    }
+
+    /**
+     * Method return nothing
+     *
+     * @return self
+     */
+    public function returnSelf(): self
+    {
+        return $this;
+    }
+
+    /**
+     * Method return nothing
+     *
+     * @return $this
+     */
+    public function returnThis(): self
+    {
+        return $this;
+    }
+
+    /**
+     * Method return nothing
+     *
+     * @return ReturnCheckTestClass
+     */
+    public function returnClassName(): self
+    {
+        return $this;
     }
 }

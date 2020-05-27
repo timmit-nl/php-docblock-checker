@@ -5,16 +5,6 @@ namespace PhpDocBlockChecker\Status\StatusType\Warning;
 class ReturnMissingWarning extends Warning
 {
     /**
-     * @var string
-     */
-    private $method;
-
-    /**
-     * @var string
-     */
-    private $methodName;
-
-    /**
      * ReturnMissingWarning constructor.
      * @param string $file
      * @param string $class
@@ -35,22 +25,6 @@ class ReturnMissingWarning extends Warning
     public function getType()
     {
         return 'return-missing';
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethodName()
-    {
-        return $this->methodName;
     }
 
     /**

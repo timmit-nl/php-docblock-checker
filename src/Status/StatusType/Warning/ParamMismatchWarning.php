@@ -7,16 +7,6 @@ class ParamMismatchWarning extends Warning
     /**
      * @var string
      */
-    private $method;
-
-    /**
-     * @var string
-     */
-    private $methodName;
-
-    /**
-     * @var string
-     */
     private $param;
     /**
      * @var string
@@ -54,22 +44,6 @@ class ParamMismatchWarning extends Warning
     public function getType()
     {
         return 'param-mismatch';
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethodName()
-    {
-        return $this->methodName;
     }
 
     /**

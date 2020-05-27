@@ -20,6 +20,12 @@ class ReturnCheck extends Check
                     continue;
                 }
 
+                $className = '';
+
+                if (!empty($method['class'])) {
+                    $className = \basename(str_replace('\\', '/', ($method['class'])));
+                }
+
                 if (empty($method['docblock']['return'])) {
                     $this->fileStatus->add(
                         new ReturnMissingWarning(
@@ -30,6 +36,18 @@ class ReturnCheck extends Check
                         )
                     );
                     continue;
+                }
+
+                $selfAliases = [
+                    'self',
+                    '$this',
+                    $className,
+                ];
+
+                if (\in_array($method['return'], $selfAliases)) {
+                    if (\in_array($method['docblock']['return'], $selfAliases)) {
+                        continue;
+                    }
                 }
 
                 if (is_array($method['return'])) {

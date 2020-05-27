@@ -5,14 +5,6 @@ namespace PhpDocBlockChecker\Status\StatusType\Error;
 class DescriptionError extends Error
 {
     /**
-     * @var string
-     */
-    private $method;
-
-    /** @var string */
-    private $methodName;
-
-    /**
      * MethodError constructor.
      *
      * @param string $file
@@ -27,25 +19,9 @@ class DescriptionError extends Error
         $this->methodName = \explode('::', $method)[1];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethodName()
-    {
-        return $this->methodName;
-    }
-
     public function getType()
     {
-        return 'method';
+        return 'description';
     }
 
     /**

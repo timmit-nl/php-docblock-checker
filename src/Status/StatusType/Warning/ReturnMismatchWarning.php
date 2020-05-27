@@ -7,16 +7,6 @@ class ReturnMismatchWarning extends Warning
     /**
      * @var string
      */
-    private $method;
-
-    /**
-     * @var string
-     */
-    private $methodName;
-
-    /**
-     * @var string
-     */
     private $returnType;
     /**
      * @var string
@@ -53,22 +43,6 @@ class ReturnMismatchWarning extends Warning
     /**
      * @return string
      */
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethodName()
-    {
-        return $this->methodName;
-    }
-
-    /**
-     * @return string
-     */
     public function getReturnType()
     {
         return $this->returnType;
@@ -89,6 +63,6 @@ class ReturnMismatchWarning extends Warning
     {
         return parent::getDecoratedMessage() . '<info>' . $this->method .
             '</info> - @return <fg=blue>' . $this->docType .
-            '</>  does not match method signature (' . $this->returnType . ').';
+            '</> does not match method signature (' . $this->returnType . ').';
     }
 }

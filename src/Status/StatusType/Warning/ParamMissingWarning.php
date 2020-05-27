@@ -7,16 +7,6 @@ class ParamMissingWarning extends Warning
     /**
      * @var string
      */
-    private $method;
-
-    /**
-     * @var string
-     */
-    private $methodName;
-
-    /**
-     * @var string
-     */
     private $param;
 
     /**
@@ -42,22 +32,6 @@ class ParamMissingWarning extends Warning
     public function getType()
     {
         return 'param-missing';
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethodName()
-    {
-        return $this->methodName;
     }
 
     /**

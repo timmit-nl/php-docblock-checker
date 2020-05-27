@@ -2,6 +2,7 @@
 
 namespace PhpDocBlockChecker\Tests\Check\ParamCheck;
 
+use ReflectionClass;
 use PhpParser\ParserFactory;
 use PhpDocBlockChecker\Config\Config;
 use PhpDocBlockChecker\Check\ParamCheck;
@@ -39,6 +40,9 @@ class ParamCheckTest extends \PHPUnit_Framework_TestCase
     {
         $filePath = __DIR__ . \DIRECTORY_SEPARATOR . 'ParamCheckTestClass.php';
 
+        require $filePath;
+        $reflection = new ReflectionClass('PhpDocBlockChecker\Tests\Check\ParamCheck\ParamCheckTestClass');
+
         $this->paramCheck->check($this->fileParser->parseFile($filePath));
 
         $expected = [
@@ -48,24 +52,32 @@ class ParamCheckTest extends \PHPUnit_Framework_TestCase
             'failNullable2' => ParamMismatchWarning::class,
         ];
 
-        $success = [
-            'success',
-            'success2',
-            'successNullable',
-            'successNullable2',
-        ];
+        $methods = $reflection->getMethods();
 
-        $actual = [];
+        $success = [];
+
+        foreach ($methods as $method) {
+            if (\in_array($method->getName(), \array_keys($expected))) {
+                continue;
+            }
+
+            $success[] = $method->getName();
+        }
+
+        $actualFails = [];
 
         foreach ($this->fileStatus->getWarnings() as $warning) {
-            $actual[$warning->getMethodName()] = \get_class($warning);
+            $actualFails[$warning->getMethodName()] = \get_class($warning);
         }
 
         foreach ($success as $successMethod) {
-            $this->assertFalse(\in_array($successMethod, \array_keys($actual)));
+            $this->assertFalse(
+                \in_array($successMethod, \array_keys($actualFails)),
+                "$successMethod found in actualFails array but must not"
+            );
         }
 
         $this->assertFalse($this->fileStatus->hasErrors());
-        $this->assertEmpty(array_diff(array_keys($expected), array_keys($actual)));
+        $this->assertEmpty(array_diff(array_keys($expected), array_keys($actualFails)));
     }
 }
