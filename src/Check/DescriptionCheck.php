@@ -15,6 +15,11 @@ class DescriptionCheck extends Check
     public function check(FileInfo $file)
     {
         foreach ($file->getMethods() as $name => $method) {
+            // If the docblock is inherited, we can't check for params and return types:
+            if (isset($method['docblock']['inherit']) && $method['docblock']['inherit']) {
+                continue;
+            }
+
             $treatAsError = true;
             if (false === $method['has_return'] &&
                 $this->config->isOnlySignatures() &&

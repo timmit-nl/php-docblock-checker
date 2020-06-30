@@ -15,6 +15,11 @@ class ReturnCheck extends Check
     public function check(FileInfo $file)
     {
         foreach ($file->getMethods() as $name => $method) {
+            // If the docblock is inherited, we can't check for params and return types:
+            if (isset($method['docblock']['inherit']) && $method['docblock']['inherit']) {
+                continue;
+            }
+
             if (!empty($method['return'])) {
                 if (\is_string($method['return']) && 'void' === $method['return']) {
                     continue;
