@@ -26,4 +26,20 @@ class TestClass
     {
         return true;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function inheritDoc1()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function inheritDoc2()
+    {
+        return true;
+    }
 }

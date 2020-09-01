@@ -11,6 +11,6 @@ class DescriptionTag extends Tag
      */
     public function __construct($value)
     {
-        parent::__construct(DocblockParser::DESCRIPTION_TAG_NME, $value);
+        parent::__construct(DocblockParser::DESCRIPTION_TAG_LINE, $value);
     }
 }

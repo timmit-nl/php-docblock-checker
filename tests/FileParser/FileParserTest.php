@@ -42,5 +42,11 @@ class FileParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Test description', $methodDescription['docblock']['comment']);
         $this->assertTrue($methodDescription['has_return']);
         $this->assertEmpty($methodDescription['params']);
+
+        $methodInheritDoc1 = $fileInfo->getMethods()['PhpDocBlockChecker\FileParser\TestClass::inheritDoc1'];
+        $this->assertTrue($methodInheritDoc1['docblock']['inherit']);
+
+        $methodInheritDoc2 = $fileInfo->getMethods()['PhpDocBlockChecker\FileParser\TestClass::inheritDoc2'];
+        $this->assertTrue($methodInheritDoc2['docblock']['inherit']);
     }
 }

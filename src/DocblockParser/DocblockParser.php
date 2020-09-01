@@ -8,7 +8,7 @@ namespace PhpDocBlockChecker\DocblockParser;
  */
 class DocblockParser
 {
-    public const DESCRIPTION_TAG_NME = '_descriptionLine';
+    public const DESCRIPTION_TAG_LINE = '_descriptionLine';
 
     /**
      * Parse the comment into the component parts and set the state of the object.
@@ -30,7 +30,7 @@ class DocblockParser
                 $matchBody = \trim(\substr($matchBody, 0, -2));
             }
 
-            $tags->addTag($this->getTagEntity(self::DESCRIPTION_TAG_NME, $matchBody));
+            $tags->addTag($this->getTagEntity(self::DESCRIPTION_TAG_LINE, $matchBody));
         }
 
         preg_match_all('/@([a-zA-Z]+) *(.*)\s*/', $comment, $matches, PREG_SET_ORDER);
@@ -43,7 +43,7 @@ class DocblockParser
                 $body = \trim(\substr($body, 0, -2));
             }
 
-            $tags->addTag($this->getTagEntity($tag, $body));
+            $tags->addTag($this->getTagEntity(\strtolower($tag), $body));
         }
 
         return $tags;
@@ -64,7 +64,7 @@ class DocblockParser
             return new ReturnTag($tag, $body);
         }
 
-        if ($tag === self::DESCRIPTION_TAG_NME) {
+        if ($tag === self::DESCRIPTION_TAG_LINE) {
             return new DescriptionTag($body);
         }
 

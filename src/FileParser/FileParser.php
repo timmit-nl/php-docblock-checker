@@ -312,7 +312,7 @@ class FileParser
             }
         }
 
-        if ($tagCollection->hasTag(DocblockParser::DESCRIPTION_TAG_NME)) {
+        if ($tagCollection->hasTag(DocblockParser::DESCRIPTION_TAG_LINE)) {
             $return = $tagCollection->getDescriptionTags();
 
             $comment = [];

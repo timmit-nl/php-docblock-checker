@@ -25,7 +25,7 @@ EOF;
 
         $this->assertInstanceOf(TagCollection::class, $result);
 
-        $this->assertTrue($result->hasTag(DocblockParser::DESCRIPTION_TAG_NME));
+        $this->assertTrue($result->hasTag(DocblockParser::DESCRIPTION_TAG_LINE));
         $this->assertTrue($result->hasTag('author'));
         $this->assertTrue($result->hasTag('param'));
         $this->assertTrue($result->hasTag('return'));
@@ -77,5 +77,20 @@ EOF;
             $this->assertEquals($expected[$key]['type'], $paramTag->getType());
             $this->assertEquals($expected[$key]['desc'], $paramTag->getDesc());
         }
+    }
+
+    public function testParseInheritComment()
+    {
+        $comment = <<<EOF
+/**
+  * {@inheritdoc}
+  */
+EOF;
+
+        $docblockParser = new DocblockParser();
+        $result = $docblockParser->parseComment($comment);
+
+        $this->assertInstanceOf(TagCollection::class, $result);
+        $this->assertTrue($result->hasTag('inheritdoc'));
     }
 }
