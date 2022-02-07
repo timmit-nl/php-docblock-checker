@@ -59,10 +59,13 @@ class ReturnCheck extends Check
                     $docblockTypes = explode('|', $method['docblock']['return']);
                     foreach ($docblockTypes as $k => $type) {
                         if (substr($type, -2) === '[]') {
-                            $docblockTypes[$k] = 'array';
+                            if (!in_array('array', $docblockTypes)) {
+                                $docblockTypes[$k] = 'array';
+                            } else {
+                                unset($docblockTypes[$k]);
+                            }
                         }
                     }
-                    array_unique($docblockTypes);
                     sort($docblockTypes);
 
                     if ($method['return'] !== $docblockTypes) {
