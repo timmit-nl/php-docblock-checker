@@ -63,6 +63,7 @@ class ReturnCheck extends Check
                         }
                     }
                     array_unique($docblockTypes);
+                    sort($docblockTypes);
 
                     if ($method['return'] !== $docblockTypes) {
                         $this->fileStatus->add(
