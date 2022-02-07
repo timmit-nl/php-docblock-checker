@@ -32,9 +32,16 @@ class ParamCheck extends Check
 
                 if (!empty($type)) {
                     $docBlockTypes = explode('|', $method['docblock']['params'][$param]);
-                    $methodTypes   = explode('|', $type);
 
+                    foreach ($docBlockTypes as $k => $type) {
+                        if (substr($type, -2) === '[]') {
+                            $docBlockTypes[$k] = 'array';
+                        }
+                    }
+                    array_unique($docBlockTypes);
                     sort($docBlockTypes);
+
+                    $methodTypes   = explode('|', $type);
 
                     if (!\in_array('null', $methodTypes)) {
                         try {
@@ -50,7 +57,8 @@ class ParamCheck extends Check
                                     }
                                 }
                             }
-                        } catch (Exception $ex) {}
+                        } catch (Exception $ex) {
+                        }
                     }
 
                     $methodTypes = \array_unique($methodTypes);

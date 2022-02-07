@@ -57,7 +57,13 @@ class ReturnCheck extends Check
 
                 if (is_array($method['return'])) {
                     $docblockTypes = explode('|', $method['docblock']['return']);
-                    sort($docblockTypes);
+                    foreach ($docblockTypes as $k => $type) {
+                        if (substr($type, -2) === '[]') {
+                            $docblockTypes[$k] = 'array';
+                        }
+                    }
+                    array_unique($docblockTypes);
+
                     if ($method['return'] !== $docblockTypes) {
                         $this->fileStatus->add(
                             new ReturnMismatchWarning(
