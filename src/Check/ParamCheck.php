@@ -53,26 +53,29 @@ class ParamCheck extends Check
                         } catch (Exception $ex) {
                         }
                     }
-
                     $methodTypes = \array_unique($methodTypes);
                     sort($methodTypes);
 
-                    if ($docBlockTypes !== $methodTypes) {
-                        if ($type === 'array' && substr($method['docblock']['params'][$param], -2) === '[]') {
-                            // Do nothing because this is fine.
-                        } else {
-                            $this->fileStatus->add(
-                                new ParamMismatchWarning(
-                                    $file->getFileName(),
-                                    $name,
-                                    $method['line'],
-                                    $name,
-                                    $param,
-                                    $type,
-                                    $method['docblock']['params'][$param]
-                                )
-                            );
+                    foreach ($docBlockTypes as $k => $subType) {
+                        if (substr($subType, -2) === '[]') {
+                            $docBlockTypes[$k] = 'array';
                         }
+                    }
+                    $docBlockTypes = \array_unique($docBlockTypes);
+                    sort($docBlockTypes);
+
+                    if ($docBlockTypes !== $methodTypes) {
+                        $this->fileStatus->add(
+                            new ParamMismatchWarning(
+                                $file->getFileName(),
+                                $name,
+                                $method['line'],
+                                $name,
+                                $param,
+                                $type,
+                                $method['docblock']['params'][$param]
+                            )
+                        );
                     }
                 }
             }
