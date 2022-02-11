@@ -58,10 +58,13 @@ class ParamCheck extends Check
 
                     foreach ($docBlockTypes as $k => $subType) {
                         if (substr($subType, -2) === '[]') {
-                            $docBlockTypes[$k] = 'array';
+                            if (!in_array('array', $docBlockTypes)) {
+                                $docBlockTypes[$k] = 'array';
+                            } else {
+                                unset($docBlockTypes[$k]);
+                            }
                         }
                     }
-                    $docBlockTypes = \array_unique($docBlockTypes);
                     sort($docBlockTypes);
 
                     if ($docBlockTypes !== $methodTypes) {
