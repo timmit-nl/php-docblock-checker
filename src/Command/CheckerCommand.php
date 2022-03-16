@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP Docblock Checker
  *
@@ -91,7 +92,7 @@ class CheckerCommand extends Command
                 'l',
                 InputOption::VALUE_REQUIRED,
                 'Number of files per line in progress',
-                50
+                1
             )
             ->addOption(
                 'fail-on-warnings',
@@ -173,7 +174,7 @@ class CheckerCommand extends Command
 
             $status = $fileChecker->checkFile($file->getPathname());
             $statusCollection->addFileStatus($status);
-
+            $output->write($file->getPathname());
             if ($config->isVerbose()) {
                 if ($status->hasErrors()) {
                     $output->write('<fg=red>F</>');
@@ -244,7 +245,7 @@ class CheckerCommand extends Command
         }
 
         return $statusCollection->hasErrors() ||
-        ($config->isFailOnWarnings() && $statusCollection->hasWarnings()) ?
+            ($config->isFailOnWarnings() && $statusCollection->hasWarnings()) ?
             1 : 0;
     }
 }
