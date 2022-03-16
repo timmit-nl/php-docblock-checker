@@ -171,10 +171,10 @@ class CheckerCommand extends Command
             if (!\file_exists($file->getPathname())) {
                 continue;
             }
+            $output->write($file->getPathname());
 
             $status = $fileChecker->checkFile($file->getPathname());
             $statusCollection->addFileStatus($status);
-            $output->write($file->getPathname());
             if ($config->isVerbose()) {
                 if ($status->hasErrors()) {
                     $output->write('<fg=red>F</>');
