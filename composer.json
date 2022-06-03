@@ -29,8 +29,8 @@
   "require": {
     "php": ">=5.5",
     "nikic/php-parser": "3.*|4.*",
-    "symfony/console": ">=3.3.10",
-    "symfony/yaml": ">=3.3.10",
+    "symfony/console": "6.0.*",
+    "symfony/yaml": "6.0.*",
     "ext-json": "*"
   },
   "require-dev": {
