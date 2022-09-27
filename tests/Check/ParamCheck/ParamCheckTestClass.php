@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Tests\Check\ParamCheck;
+namespace TiMMiT\PhpDocBlockChecker\Tests\Check\ParamCheck;
 
 use stdClass;
 
@@ -16,7 +16,6 @@ class ParamCheckTestClass
      */
     public function missingParam(int $i)
     {
-
     }
 
     /**
@@ -24,7 +23,6 @@ class ParamCheckTestClass
      */
     public function mismatchParam(int $i)
     {
-
     }
 
     /**
@@ -33,7 +31,6 @@ class ParamCheckTestClass
      */
     public function success2(int $i, $r)
     {
-
     }
 
     /**
@@ -41,7 +38,6 @@ class ParamCheckTestClass
      */
     public function failNullable(stdClass $p = null)
     {
-
     }
 
     /**
@@ -49,7 +45,6 @@ class ParamCheckTestClass
      */
     public function failNullable2(stdClass $p)
     {
-
     }
 
     /**
@@ -57,7 +52,6 @@ class ParamCheckTestClass
      */
     public function successNullable(stdClass $p = null)
     {
-
     }
 
     /**
@@ -65,7 +59,6 @@ class ParamCheckTestClass
      */
     public function successNullable2(?stdClass $p)
     {
-
     }
 
     /**
@@ -73,12 +66,10 @@ class ParamCheckTestClass
      */
     public function successInheritDocs(?stdClass $p)
     {
-
     }
 
     /** @inheritdoc */
     public function successInheritDocsOneLine(?stdClass $p)
     {
-
     }
 }

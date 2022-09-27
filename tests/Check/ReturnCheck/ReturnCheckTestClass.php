@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Tests\Check\ReturnCheck;
+namespace TiMMiT\PhpDocBlockChecker\Tests\Check\ReturnCheck;
 
 use stdClass;
 
@@ -69,7 +69,6 @@ class ReturnCheckTestClass
      */
     public function returnVoid(): void
     {
-
     }
 
     /**
@@ -79,7 +78,6 @@ class ReturnCheckTestClass
      */
     public function returnVoidWithTag(): void
     {
-
     }
 
     /**

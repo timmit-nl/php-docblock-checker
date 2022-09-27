@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\DocblockParser;
+namespace TiMMiT\PhpDocBlockChecker\DocblockParser;
 
 class DocblockParserTest extends \PHPUnit_Framework_TestCase
 {

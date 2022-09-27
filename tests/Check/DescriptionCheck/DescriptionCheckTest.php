@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Tests\Check\DescriptionCheck;
+namespace TiMMiT\PhpDocBlockChecker\Tests\Check\DescriptionCheck;
 
 use ReflectionClass;
 use PhpParser\ParserFactory;

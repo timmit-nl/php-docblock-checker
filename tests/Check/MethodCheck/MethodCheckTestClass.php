@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Tests\Check\MethodCheck;
+namespace TiMMiT\PhpDocBlockChecker\Tests\Check\MethodCheck;
 
 class MethodCheckTestClass
 {
@@ -16,6 +16,5 @@ class MethodCheckTestClass
 
     public function fail(int $i)
     {
-
     }
 }
