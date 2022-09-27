@@ -8,8 +8,8 @@
  * @link         http://www.phptesting.org/
  */
 
-use PhpDocBlockChecker\Command\CheckerCommand;
-use PhpDocBlockChecker\InputFactory;
+use TiMMiT\PhpDocBlockChecker\Command\CheckerCommand;
+use TiMMiT\PhpDocBlockChecker\InputFactory;
 use Symfony\Component\Console\Application;
 
 $paths = [
@@ -41,5 +41,5 @@ if (!$loaded) {
 (new Application('PHP Docblock Checker', '@package_version@'))
     ->add(new CheckerCommand())
     ->getApplication()
-    ->setDefaultCommand('check', true)// Single command application
+    ->setDefaultCommand('check', true) // Single command application
     ->run();
