@@ -1,12 +1,12 @@
 <?php
 
-namespace PhpDocBlockChecker\Check;
+namespace TiMMiT\PhpDocBlockChecker\Check;
 
 use Exception;
 use ReflectionMethod;
-use PhpDocBlockChecker\FileInfo;
-use PhpDocBlockChecker\Status\StatusType\Warning\ParamMismatchWarning;
-use PhpDocBlockChecker\Status\StatusType\Warning\ParamMissingWarning;
+use TiMMiT\PhpDocBlockChecker\FileInfo;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Warning\ParamMismatchWarning;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Warning\ParamMissingWarning;
 
 class ParamCheck extends Check
 {

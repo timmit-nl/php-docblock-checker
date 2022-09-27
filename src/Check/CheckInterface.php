@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpDocBlockChecker\Check;
+namespace TiMMiT\PhpDocBlockChecker\Check;
 
-use PhpDocBlockChecker\FileInfo;
+use TiMMiT\PhpDocBlockChecker\FileInfo;
 
 interface CheckInterface
 {

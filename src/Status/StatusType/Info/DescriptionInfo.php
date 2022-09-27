@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Info;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Info;
 
 class DescriptionInfo extends Info
 {
@@ -33,7 +33,6 @@ class DescriptionInfo extends Info
      */
     public function getDecoratedMessage()
     {
-        return parent::getDecoratedMessage(
-            ) . 'Method <info>' . $this->method . '</info> is missing a description line.';
+        return parent::getDecoratedMessage() . 'Method <info>' . $this->method . '</info> is missing a description line.';
     }
 }

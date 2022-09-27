@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpDocBlockChecker\Check;
+namespace TiMMiT\PhpDocBlockChecker\Check;
 
-use PhpDocBlockChecker\FileInfo;
-use PhpDocBlockChecker\Config\Config;
-use PhpDocBlockChecker\Status\FileStatus;
-use PhpDocBlockChecker\Status\StatusType\Passed\Passed;
+use TiMMiT\PhpDocBlockChecker\FileInfo;
+use TiMMiT\PhpDocBlockChecker\Config\Config;
+use TiMMiT\PhpDocBlockChecker\Status\FileStatus;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Passed\Passed;
 
 class Checker
 {

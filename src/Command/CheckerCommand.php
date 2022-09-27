@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP Docblock Checker
  *
@@ -7,22 +8,22 @@
  * @link         http://www.phptesting.org/
  */
 
-namespace PhpDocBlockChecker\Command;
+namespace TiMMiT\PhpDocBlockChecker\Command;
 
 use PhpParser\ParserFactory;
-use PhpDocBlockChecker\FileChecker;
-use PhpDocBlockChecker\Check\Checker;
-use PhpDocBlockChecker\Config\ConfigParser;
-use PhpDocBlockChecker\FileInfoCacheProvider;
-use PhpDocBlockChecker\FileParser\FileParser;
-use PhpDocBlockChecker\Config\ConfigProcessor;
+use TiMMiT\PhpDocBlockChecker\FileChecker;
+use TiMMiT\PhpDocBlockChecker\Check\Checker;
+use TiMMiT\PhpDocBlockChecker\Config\ConfigParser;
+use TiMMiT\PhpDocBlockChecker\FileInfoCacheProvider;
+use TiMMiT\PhpDocBlockChecker\FileParser\FileParser;
+use TiMMiT\PhpDocBlockChecker\Config\ConfigProcessor;
 use Symfony\Component\Console\Command\Command;
-use PhpDocBlockChecker\Status\StatusCollection;
+use TiMMiT\PhpDocBlockChecker\Status\StatusCollection;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
-use PhpDocBlockChecker\DocblockParser\DocblockParser;
+use TiMMiT\PhpDocBlockChecker\DocblockParser\DocblockParser;
 use Symfony\Component\Console\Output\OutputInterface;
-use PhpDocBlockChecker\FileProvider\FileProviderFactory;
+use TiMMiT\PhpDocBlockChecker\FileProvider\FileProviderFactory;
 
 /**
  * Console command to check a directory of PHP files for Docblocks.
@@ -244,7 +245,7 @@ class CheckerCommand extends Command
         }
 
         return $statusCollection->hasErrors() ||
-        ($config->isFailOnWarnings() && $statusCollection->hasWarnings()) ?
+            ($config->isFailOnWarnings() && $statusCollection->hasWarnings()) ?
             1 : 0;
     }
 }

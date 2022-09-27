@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpDocBlockChecker\Check;
+namespace TiMMiT\PhpDocBlockChecker\Check;
 
-use PhpDocBlockChecker\FileInfo;
-use PhpDocBlockChecker\Status\StatusType\Error\MethodError;
-use PhpDocBlockChecker\Status\StatusType\Info\MethodInfo;
+use TiMMiT\PhpDocBlockChecker\FileInfo;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Error\MethodError;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Info\MethodInfo;
 
 class MethodCheck extends Check
 {
@@ -15,9 +15,11 @@ class MethodCheck extends Check
     {
         foreach ($file->getMethods() as $name => $method) {
             $treatAsError = true;
-            if (false === $method['has_return'] &&
+            if (
+                false === $method['has_return'] &&
                 $this->config->isOnlySignatures() &&
-                (empty($method['params']) || 0 === count($method['params']))) {
+                (empty($method['params']) || 0 === count($method['params']))
+            ) {
                 $treatAsError = false;
             }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpDocBlockChecker\Check;
+namespace TiMMiT\PhpDocBlockChecker\Check;
 
-use PhpDocBlockChecker\FileInfo;
-use PhpDocBlockChecker\Status\StatusType\Warning\ReturnMissingWarning;
-use PhpDocBlockChecker\Status\StatusType\Warning\ReturnMismatchWarning;
+use TiMMiT\PhpDocBlockChecker\FileInfo;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Warning\ReturnMissingWarning;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Warning\ReturnMismatchWarning;
 
 class ReturnCheck extends Check
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Info;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Info;
 
-use PhpDocBlockChecker\Status\StatusType\StatusType;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\StatusType;
 
 abstract class Info extends StatusType
 {

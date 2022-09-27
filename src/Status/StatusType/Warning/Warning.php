@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Warning;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Warning;
 
-use PhpDocBlockChecker\Status\StatusType\StatusType;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\StatusType;
 
 abstract class Warning extends StatusType
 {

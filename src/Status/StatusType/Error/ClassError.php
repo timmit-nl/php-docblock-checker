@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Error;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Error;
 
 class ClassError extends Error
 {

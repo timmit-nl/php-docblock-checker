@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Error;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Error;
 
 class DescriptionError extends Error
 {
@@ -29,7 +29,6 @@ class DescriptionError extends Error
      */
     public function getDecoratedMessage()
     {
-        return parent::getDecoratedMessage(
-            ) . 'Method <info>' . $this->method . '</info> is missing a description line.';
+        return parent::getDecoratedMessage() . 'Method <info>' . $this->method . '</info> is missing a description line.';
     }
 }

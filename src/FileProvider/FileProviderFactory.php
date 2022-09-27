@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpDocBlockChecker\FileProvider;
+namespace TiMMiT\PhpDocBlockChecker\FileProvider;
 
-use PhpDocBlockChecker\Config\Config;
+use TiMMiT\PhpDocBlockChecker\Config\Config;
 use RuntimeException;
 
 class FileProviderFactory

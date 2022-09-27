@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpDocBlockChecker\Check;
+namespace TiMMiT\PhpDocBlockChecker\Check;
 
-use PhpDocBlockChecker\Config\Config;
-use PhpDocBlockChecker\Status\FileStatus;
+use TiMMiT\PhpDocBlockChecker\Config\Config;
+use TiMMiT\PhpDocBlockChecker\Status\FileStatus;
 
 /**
  * Class Check

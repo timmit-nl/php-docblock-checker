@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpDocBlockChecker\Status;
+namespace TiMMiT\PhpDocBlockChecker\Status;
 
-use PhpDocBlockChecker\Status\StatusType\Error\Error;
-use PhpDocBlockChecker\Status\StatusType\Info\Info;
-use PhpDocBlockChecker\Status\StatusType\Warning\Warning;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Error\Error;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Info\Info;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Warning\Warning;
 
 /**
  * Class StatusCollection
