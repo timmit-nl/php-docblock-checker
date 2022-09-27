@@ -71,7 +71,7 @@ class FileInfo implements \JsonSerializable
         return $this->mtime;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'fileName' => $this->fileName,
