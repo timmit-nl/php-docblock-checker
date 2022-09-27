@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType;
 
 /**
  * Class StatusType

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Config;
+namespace TiMMiT\PhpDocBlockChecker\Config;
 
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;

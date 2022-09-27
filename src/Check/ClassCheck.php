@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpDocBlockChecker\Check;
+namespace TiMMiT\PhpDocBlockChecker\Check;
 
-use PhpDocBlockChecker\FileInfo;
-use PhpDocBlockChecker\Status\StatusType\Error\ClassError;
+use TiMMiT\PhpDocBlockChecker\FileInfo;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Error\ClassError;
 
 class ClassCheck extends Check
 {

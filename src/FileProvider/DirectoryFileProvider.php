@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\FileProvider;
+namespace TiMMiT\PhpDocBlockChecker\FileProvider;
 
 use FilesystemIterator;
 use RecursiveDirectoryIterator;

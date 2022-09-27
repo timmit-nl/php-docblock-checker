@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker;
+namespace TiMMiT\PhpDocBlockChecker;
 
 class FileInfo implements \JsonSerializable
 {

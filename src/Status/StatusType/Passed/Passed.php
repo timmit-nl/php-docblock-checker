@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Passed;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Passed;
 
-use PhpDocBlockChecker\Status\StatusType\StatusType;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\StatusType;
 
 class Passed extends StatusType
 {

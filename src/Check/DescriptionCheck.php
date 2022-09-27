@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpDocBlockChecker\Check;
+namespace TiMMiT\PhpDocBlockChecker\Check;
 
-use PhpDocBlockChecker\FileInfo;
-use PhpDocBlockChecker\Status\StatusType\Info\DescriptionInfo;
-use PhpDocBlockChecker\Status\StatusType\Error\DescriptionError;
+use TiMMiT\PhpDocBlockChecker\FileInfo;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Info\DescriptionInfo;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\Error\DescriptionError;
 
 class DescriptionCheck extends Check
 {
@@ -21,9 +21,11 @@ class DescriptionCheck extends Check
             }
 
             $treatAsError = true;
-            if (false === $method['has_return'] &&
+            if (
+                false === $method['has_return'] &&
                 $this->config->isOnlySignatures() &&
-                (empty($method['params']) || 0 === count($method['params']))) {
+                (empty($method['params']) || 0 === count($method['params']))
+            ) {
                 $treatAsError = false;
             }
 

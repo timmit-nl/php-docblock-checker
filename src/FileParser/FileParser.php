@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\FileParser;
+namespace TiMMiT\PhpDocBlockChecker\FileParser;
 
 use PhpParser\Parser;
 use PhpParser\Node\Expr;
@@ -10,13 +10,13 @@ use PhpParser\Comment\Doc;
 use PhpParser\NodeAbstract;
 use PhpParser\Node\Stmt\Use_;
 use PhpParser\Node\Stmt\Class_;
-use PhpDocBlockChecker\FileInfo;
+use TiMMiT\PhpDocBlockChecker\FileInfo;
 use PhpParser\Node\NullableType;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpDocBlockChecker\DocblockParser\ReturnTag;
-use PhpDocBlockChecker\DocblockParser\DocblockParser;
-use PhpDocBlockChecker\DocblockParser\DescriptionTag;
+use TiMMiT\PhpDocBlockChecker\DocblockParser\ReturnTag;
+use TiMMiT\PhpDocBlockChecker\DocblockParser\DocblockParser;
+use TiMMiT\PhpDocBlockChecker\DocblockParser\DescriptionTag;
 
 /**
  * Uses Nikic/PhpParser to parse PHP files and find relevant information for the checker.
@@ -179,7 +179,8 @@ class FileParser
                             $type = strpos($type, '\\') === 0 ? substr($type, 1) : $type;
                         }
 
-                        if (property_exists($param, 'default') &&
+                        if (
+                            property_exists($param, 'default') &&
                             $param->default instanceof Expr &&
                             property_exists($param->default, 'name') &&
                             property_exists($param->default->name, 'parts') &&

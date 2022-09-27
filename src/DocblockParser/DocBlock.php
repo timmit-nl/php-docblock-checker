@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\DocblockParser;
+namespace TiMMiT\PhpDocBlockChecker\DocblockParser;
 
 /**
  * Parse the docblock of a function or method
@@ -88,10 +88,10 @@ class DocBlock
      * @type Array
      */
     public static $vectors
-        = [
-            'param'  => ['type', 'var', 'desc'],
-            'return' => ['type', 'desc'],
-        ];
+    = [
+        'param'  => ['type', 'var', 'desc'],
+        'return' => ['type', 'desc'],
+    ];
 
     /**
      * The description of the symbol

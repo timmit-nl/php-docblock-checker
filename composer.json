@@ -1,5 +1,5 @@
 {
-  "name": "sweetstackdigital/php-docblock-checker",
+  "name": "timmit/php-docblock-checker",
   "description": "A simple tool for checking that your PHP classes and methods use docblocks.",
   "minimum-stability": "stable",
   "type": "library",
@@ -20,17 +20,23 @@
       "email": "dan.cryer@block8.co.uk",
       "homepage": "http://www.block8.co.uk",
       "role": "Developer"
-    }
+    },
+	{
+		"name": "Tim Schoondergang",
+		"email": "t.schoondergangr@timmit.nl",
+		"homepage": "http://www.TiMMiT.nl",
+		"role": "Developer"
+	  }
   ],
   "support": {
-    "issues": "https://github.com/dancryer/php-docblock-checker/issues",
-    "source": "https://github.com/dancryer/php-docblock-checker"
+    "issues": "https://github.com/timmit-nl/php-docblock-checker/issues",
+    "source": "https://github.com/timmit-nl/php-docblock-checker"
   },
   "require": {
-    "php": ">=5.5",
+    "php": ">=8.0",
     "nikic/php-parser": "3.*|4.*",
-    "symfony/console": "6.0.*",
-    "symfony/yaml": "6.0.*",
+    "symfony/console": ">=6.0.0",
+    "symfony/yaml": ">=6.0.0",
     "ext-json": "*"
   },
   "require-dev": {
@@ -45,8 +51,8 @@
   ],
   "autoload": {
     "psr-4": {
-        "PhpDocBlockChecker\\": "src",
-        "PhpDocBlockChecker\\Tests\\": "tests"
+        "TiMMiT\\PhpDocBlockChecker\\": "src",
+        "TiMMiT\\PhpDocBlockChecker\\Tests\\": "tests"
     }
   },
   "scripts": {

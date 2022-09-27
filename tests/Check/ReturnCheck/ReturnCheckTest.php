@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Tests\Check\ReturnCheck;
+namespace TiMMiT\PhpDocBlockChecker\Tests\Check\ReturnCheck;
 
 use ReflectionClass;
 use PhpParser\ParserFactory;

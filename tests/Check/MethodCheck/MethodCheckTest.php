@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Tests\Check\MethodCheck;
+namespace TiMMiT\PhpDocBlockChecker\Tests\Check\MethodCheck;
 
 use PhpParser\ParserFactory;
 use PhpDocBlockChecker\Config\Config;

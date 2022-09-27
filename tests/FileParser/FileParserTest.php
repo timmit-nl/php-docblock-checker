@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\FileParser;
+namespace TiMMiT\PhpDocBlockChecker\FileParser;
 
 use PhpParser\ParserFactory;
 use PhpDocBlockChecker\DocblockParser\DocblockParser;

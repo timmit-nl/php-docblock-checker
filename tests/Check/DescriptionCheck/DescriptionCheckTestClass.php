@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Tests\Check\DescriptionCheck;
+namespace TiMMiT\PhpDocBlockChecker\Tests\Check\DescriptionCheck;
 
 class DescriptionCheckTestClass
 {
@@ -9,7 +9,6 @@ class DescriptionCheckTestClass
      */
     public function success()
     {
-
     }
 
     /**
@@ -19,17 +18,14 @@ class DescriptionCheckTestClass
      */
     public function successMultiline()
     {
-
     }
 
     public function fail()
     {
-
     }
 
     /** One line comment */
     public function oneLineDescription()
     {
-
     }
 }

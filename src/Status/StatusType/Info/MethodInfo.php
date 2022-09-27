@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Info;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Info;
 
 class MethodInfo extends Info
 {

@@ -1,8 +1,7 @@
 <?php
 
-namespace PhpDocBlockChecker\Tests\Check\ClassCheck;
+namespace TiMMiT\PhpDocBlockChecker\Tests\Check\ClassCheck;
 
 class ClassCheckFailTestClass
 {
-
 }

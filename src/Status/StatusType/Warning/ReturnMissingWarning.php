@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Warning;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Warning;
 
 class ReturnMissingWarning extends Warning
 {

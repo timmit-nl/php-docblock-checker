@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\Config;
+namespace TiMMiT\PhpDocBlockChecker\Config;
 
 /**
  * Class Config

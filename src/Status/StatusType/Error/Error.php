@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpDocBlockChecker\Status\StatusType\Error;
+namespace TiMMiT\PhpDocBlockChecker\Status\StatusType\Error;
 
-use PhpDocBlockChecker\Status\StatusType\StatusType;
+use TiMMiT\PhpDocBlockChecker\Status\StatusType\StatusType;
 
 abstract class Error extends StatusType
 {

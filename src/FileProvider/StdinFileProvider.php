@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpDocBlockChecker\FileProvider;
+namespace TiMMiT\PhpDocBlockChecker\FileProvider;
 
 class StdinFileProvider implements FileProviderInterface
 {

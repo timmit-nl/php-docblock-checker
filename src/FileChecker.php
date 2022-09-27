@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpDocBlockChecker;
+namespace TiMMiT\PhpDocBlockChecker;
 
-use PhpDocBlockChecker\Check\Checker;
-use PhpDocBlockChecker\FileParser\FileParser;
-use PhpDocBlockChecker\Status\FileStatus;
+use TiMMiT\PhpDocBlockChecker\Check\Checker;
+use TiMMiT\PhpDocBlockChecker\FileParser\FileParser;
+use TiMMiT\PhpDocBlockChecker\Status\FileStatus;
 
 class FileChecker
 {
