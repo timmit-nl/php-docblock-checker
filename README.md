@@ -4,7 +4,7 @@ Check PHP files within a directory for appropriate use of Docblocks.
 ## Installation
 **Composer**:<br>
 <code>
-composer require sweetstackdigital/php-docblock-checker
+composer require timmit/php-docblock-checker
 </code>
 
 ## Usage
