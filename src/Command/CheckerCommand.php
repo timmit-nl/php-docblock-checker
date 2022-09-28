@@ -27,6 +27,7 @@ use TiMMiT\PhpDocBlockChecker\FileProvider\FileProviderFactory;
 
 /**
  * Console command to check a directory of PHP files for Docblocks.
+ *
  * @author Dan Cryer <dan@block8.co.uk>
  */
 class CheckerCommand extends Command
@@ -160,7 +161,8 @@ class CheckerCommand extends Command
 
         if ($config->isVerbose()) {
             $output->writeln('');
-            $output->writeln('PHP Docblock Checker <fg=blue>by Dan Cryer (https://www.dancryer.com)</>');
+            $output->writeln('PHP Docblock Checker <fg=blue>by <fg=blue>Tim Schoondergang (https://www.TiMMiT.nl)</>');
+            $output->writeln('based on <fg=blue>Dan Cryer (https://www.dancryer.com)</>');
             $output->writeln('');
         }
 
