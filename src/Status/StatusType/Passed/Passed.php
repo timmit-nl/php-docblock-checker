@@ -30,5 +30,6 @@ class Passed extends StatusType
     public function getDecoratedMessage()
     {
         // TODO: Implement getDecoratedMessage() method.
+        return '';
     }
 }
