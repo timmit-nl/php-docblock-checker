@@ -2,6 +2,11 @@
 
 namespace TiMMiT\PhpDocBlockChecker\DocblockParser;
 
+use ReflectionClass;
+use ReflectionProperty;
+use ReflectionFunction;
+use ReflectionMethod;
+
 /**
  * Parse the docblock of a function or method
  *

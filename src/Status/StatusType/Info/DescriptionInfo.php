@@ -7,7 +7,7 @@ class DescriptionInfo extends Info
     /**
      * @var string
      */
-    private $method;
+    protected $method;
 
     public function __construct($file, $class, $line, $method)
     {
