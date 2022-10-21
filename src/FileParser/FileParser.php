@@ -14,6 +14,7 @@ use TiMMiT\PhpDocBlockChecker\FileInfo;
 use PhpParser\Node\NullableType;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\UnionType;
 use TiMMiT\PhpDocBlockChecker\DocblockParser\ReturnTag;
 use TiMMiT\PhpDocBlockChecker\DocblockParser\DocblockParser;
 use TiMMiT\PhpDocBlockChecker\DocblockParser\DescriptionTag;
@@ -122,27 +123,47 @@ class FileParser
                     if (!$method instanceof ClassMethod) {
                         continue;
                     }
-
                     $fullMethodName = $fullClassName . '::' . $method->name;
 
                     $type = $method->returnType;
 
                     if ($type instanceof NullableType) {
                         $type = $type->type->toString();
+                    } elseif ($type instanceof UnionType) {
+                        $type = $type->types;
                     } elseif ($type instanceof NodeAbstract) {
                         $type = $type->toString();
                     }
 
-                    if (isset($uses[$type])) {
-                        $type = $uses[$type];
-                    }
+                    if (is_array($type)) {
+                        foreach ($type as &$t) {
+                            $t = (string)$t;
+                            if (isset($uses[$t])) {
+                                $t = $uses[$t];
+                            }
 
-                    if ($type !== null) {
-                        $type = strpos($type, '\\') === 0 ? substr($type, 1) : $type;
+                            if ($t !== null) {
+                                $t = strpos($t, '\\') === 0 ? substr($t, 1) : $t;
+                            }
+                        }
+                    } else {
+                        if (isset($uses[$type])) {
+                            $type = $uses[$type];
+                        }
+
+                        if ($type !== null) {
+                            $type = strpos($type, '\\') === 0 ? substr($type, 1) : $type;
+                        }
                     }
 
                     if ($method->returnType instanceof NullableType) {
-                        $type = ['null', $type];
+                        if (!is_array($type)) {
+                            $type = [$type];
+                        }
+                        $type[] = 'null';
+                    }
+
+                    if (is_array($type)) {
                         sort($type);
                     }
 
@@ -167,16 +188,34 @@ class FileParser
 
                         if ($type instanceof NullableType) {
                             $type = $type->type->toString();
+                        } elseif ($type instanceof UnionType) {
+                            $type = $type->types;
                         } elseif ($type instanceof NodeAbstract) {
-                            $type = $type->toString();
+                            if (is_callable([$type, 'toString'])) {
+                                $type = $type->toString();
+                            }
                         }
 
-                        if (isset($uses[$type])) {
-                            $type = $uses[$type];
-                        }
+                        if (is_array($type)) {
+                            foreach ($type as &$t) {
+                                $t = (string)$t;
+                                if (isset($uses[$t])) {
+                                    $t = $uses[$t];
+                                }
 
-                        if ($type !== null) {
-                            $type = strpos($type, '\\') === 0 ? substr($type, 1) : $type;
+                                if ($t !== null) {
+                                    $t = strpos($t, '\\') === 0 ? substr($t, 1) : $t;
+                                }
+                            }
+                            $type = implode('|', $type);
+                        } else {
+                            if (isset($uses[$type])) {
+                                $type = $uses[$type];
+                            }
+
+                            if ($type !== null) {
+                                $type = strpos($type, '\\') === 0 ? substr($type, 1) : $type;
+                            }
                         }
 
                         if (
