@@ -31,10 +31,10 @@ class ParamCheck extends Check
                 }
 
                 if (!empty($type)) {
-                    $docBlockTypes = explode('|', $method['docblock']['params'][$param]);
-                    $methodTypes   = explode('|', $type);
+                    $docBlockTypes = \explode('|', \preg_replace('/\([a-z]*(\|[a-z]*)*\)\[\]/', 'array', $method['docblock']['params'][$param]));
+                    $methodTypes   = \explode('|', $type);
 
-                    sort($docBlockTypes);
+                    \sort($docBlockTypes);
 
                     if (!\in_array('null', $methodTypes)) {
                         try {
@@ -54,18 +54,18 @@ class ParamCheck extends Check
                         }
                     }
                     $methodTypes = \array_unique($methodTypes);
-                    sort($methodTypes);
+                    \sort($methodTypes);
 
                     foreach ($docBlockTypes as $k => $subType) {
-                        if (substr($subType, -2) === '[]') {
-                            if (!in_array('array', $docBlockTypes)) {
+                        if (\substr($subType, -2) === '[]') {
+                            if (!\in_array('array', $docBlockTypes)) {
                                 $docBlockTypes[$k] = 'array';
                             } else {
                                 unset($docBlockTypes[$k]);
                             }
                         }
                     }
-                    sort($docBlockTypes);
+                    \sort($docBlockTypes);
 
                     if ($docBlockTypes !== $methodTypes) {
                         $this->fileStatus->add(

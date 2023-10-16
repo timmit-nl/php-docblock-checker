@@ -28,7 +28,7 @@ class ReturnCheck extends Check
                 $className = '';
 
                 if (!empty($method['class'])) {
-                    $className = \basename(str_replace('\\', '/', ($method['class'])));
+                    $className = \basename(\str_replace('\\', '/', ($method['class'])));
                 }
 
                 if (empty($method['docblock']['return'])) {
@@ -56,33 +56,33 @@ class ReturnCheck extends Check
                 }
 
                 if (is_array($method['return'])) {
-                    $docblockTypes = explode('|', $method['docblock']['return']);
-                    foreach ($docblockTypes as $k => $type) {
-                        if (substr($type, -2) === '[]') {
-                            if (!in_array('array', $docblockTypes)) {
-                                $docblockTypes[$k] = 'array';
+                    $docBlockTypes = \explode('|', \preg_replace('/\([a-z]*(\|[a-z]*)*\)\[\]/', 'array', $method['docblock']['return']));
+                    foreach ($docBlockTypes as $k => $type) {
+                        if (\substr($type, -2) === '[]') {
+                            if (!\in_array('array', $docBlockTypes)) {
+                                $docBlockTypes[$k] = 'array';
                             } else {
-                                unset($docblockTypes[$k]);
+                                unset($docBlockTypes[$k]);
                             }
                         }
                     }
-                    sort($docblockTypes);
+                    \sort($docBlockTypes);
 
-                    if ($method['return'] !== $docblockTypes) {
+                    if ($method['return'] !== $docBlockTypes) {
                         $this->fileStatus->add(
                             new ReturnMismatchWarning(
                                 $file->getFileName(),
                                 $name,
                                 $method['line'],
                                 $name,
-                                implode('|', $method['return']),
+                                \implode('|', $method['return']),
                                 $method['docblock']['return']
                             )
                         );
                     }
                 } else {
                     if ($method['docblock']['return'] !== $method['return']) {
-                        if ($method['return'] === 'array' && substr($method['docblock']['return'], -2) === '[]') {
+                        if ($method['return'] === 'array' && \substr($method['docblock']['return'], -2) === '[]') {
                             // Do nothing because this is fine.
                         } else {
                             $this->fileStatus->add(
