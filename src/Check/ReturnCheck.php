@@ -54,15 +54,19 @@ class ReturnCheck extends Check
                         continue;
                     }
                 }
-
                 if (is_array($method['return'])) {
                     $docBlockTypes = \explode('|', \preg_replace('/\([a-z]*(\|[a-z]*)*\)\[\]/', 'array', $method['docblock']['return']));
                     foreach ($docBlockTypes as $k => $type) {
-                        if (\substr($type, -2) === '[]') {
+                        if ('[]' === \substr($type, -2)) {
                             if (!\in_array('array', $docBlockTypes)) {
                                 $docBlockTypes[$k] = 'array';
                             } else {
                                 unset($docBlockTypes[$k]);
+                            }
+                        }
+                        if ('mixed' === $type) {
+                            if (!\in_array('null', $docBlockTypes)) {
+                                $docBlockTypes[] = 'null';
                             }
                         }
                     }
@@ -82,7 +86,7 @@ class ReturnCheck extends Check
                     }
                 } else {
                     if ($method['docblock']['return'] !== $method['return']) {
-                        if ($method['return'] === 'array' && \substr($method['docblock']['return'], -2) === '[]') {
+                        if ('array' === $method['return'] && '[]' === \substr($method['docblock']['return'], -2)) {
                             // Do nothing because this is fine.
                         } else {
                             $this->fileStatus->add(
