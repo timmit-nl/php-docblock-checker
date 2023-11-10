@@ -57,11 +57,16 @@ class ParamCheck extends Check
                     \sort($methodTypes);
 
                     foreach ($docBlockTypes as $k => $subType) {
-                        if (\substr($subType, -2) === '[]') {
+                        if ('[]' === \substr($subType, -2)) {
                             if (!\in_array('array', $docBlockTypes)) {
                                 $docBlockTypes[$k] = 'array';
                             } else {
                                 unset($docBlockTypes[$k]);
+                            }
+                        }
+                        if ('mixed' === $subType) {
+                            if (!\in_array('null', $docBlockTypes)) {
+                                $docBlockTypes[] = 'null';
                             }
                         }
                     }
