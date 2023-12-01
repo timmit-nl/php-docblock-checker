@@ -34,7 +34,7 @@
   "require": {
     "php": ">=8.0",
     "nikic/php-parser": "3.*|4.*",
-    "symfony/console": ">=5.0.0 <7.0.0",
+    "symfony/console": ">=5.0.0",
     "symfony/yaml": ">=5.0.0",
     "ext-json": "*"
   },
